@@ -6,7 +6,8 @@ import json
 # 載入 LINE Message API 相關函式庫
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
-from linebot.models import MessageEvent, TextMessage, TextSendMessage, StickerSendMessage
+from linebot.models import (MessageEvent, TextMessage, TextSendMessage, 
+                            StickerSendMessage, ImageSendMessage, LocationSendMessage)
 
 from dotenv import load_dotenv
 import os
@@ -38,7 +39,16 @@ def linebot():
         if type=='text':
             # 取得 LINE 收到的文字訊息
             msg = json_data['events'][0]['message']['text']
-            reply = TextSendMessage(msg)
+            if msg == '傳一張圖片吧':
+                img_url = 'https://images.unsplash.com/photo-1687777238205-d7c572cde6cc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80'
+                reply = ImageSendMessage(original_content_url=img_url, preview_image_url=img_url)
+            elif msg == '美術館在哪?':
+                reply = LocationSendMessage(title='美術館',
+                                            address='80460高雄市鼓山區美術館路80號',
+                                            latitude=22.660181,
+                                            longitude=120.286149)
+            else:
+                reply = TextSendMessage(msg)
         elif type == 'sticker':
             # 取得 stickerId
             stickerId = json_data['events'][0]['message']['stickerId']
@@ -52,7 +62,7 @@ def linebot():
         line_bot_api.reply_message(tk,reply)
     except:
         # 如果發生錯誤，印出收到的內容
-        print(body)
+        print('body', body)
     # 驗證 Webhook 使用，不能省略
     return 'OK'
 
