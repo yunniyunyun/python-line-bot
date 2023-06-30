@@ -22,7 +22,7 @@ body = {
         },
         {
           'bounds': {'x': 1434, 'y': 229, 'width': 930, 'height': 340},
-          'action': {'type': 'message', 'text': '運動用品'}
+          'action': {'type': 'uri', 'label': '運動用品', 'uri':'https://www.google.com.tw/?hl=zh_TW'}
         },
         {
           'bounds': {'x': 122, 'y': 641, 'width':560, 'height': 340},
