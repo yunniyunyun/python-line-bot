@@ -11,3 +11,10 @@ line_bot_api = LineBotApi(access_token)
 rich_menu_list = line_bot_api.get_rich_menu_list()
 for rich_menu in rich_menu_list:
     print(rich_menu.rich_menu_id)
+
+# alias_list
+# rich_menu_alias_list = line_bot_api.get_rich_menu_alias_list()
+# print(rich_menu_alias_list)
+# for rich_menu_alias in rich_menu_alias_list.aliases:
+#     print(rich_menu_alias.rich_menu_alias_id)
+#     line_bot_api.delete_rich_menu_alias(rich_menu_alias.rich_menu_alias_id)
